@@ -58,7 +58,7 @@ def add_event(event, event_date):
   cursor = conn.cursor()
 
   # etkinlik ve tarih bilgilerini "calendar" tablosuna ekle
-  cursor.execute("INSERT INTO calendar (event, event_date) VALUES (?, ?)", {event, event_date})
+  cursor.execute("INSERT INTO calendar (event, event_date) VALUES (?, ?)", (event, event_date))
 
   # degisiklikleri kaydet 
   conn.commit()
@@ -99,3 +99,12 @@ def get_events():
   conn.close()
 
   return events
+
+
+if __name__ == "__main__":
+  initialize_db()
+  add_note("eve dönüşte yumurta alınacak.")
+  add_event("Çocuk okul toplantısı var", "15.08.2025")
+
+  print(f"Notes: {get_notes()}")
+  print(f"events: {get_events()}")
